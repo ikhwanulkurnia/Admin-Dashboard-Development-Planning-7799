@@ -34,14 +34,14 @@ const Sidebar = ({ collapsed, onToggle, currentUser }) => {
   return (
     <motion.div 
       className={`fixed left-0 top-0 h-full bg-white shadow-lg z-50 transition-all duration-300 ${
-        collapsed ? 'w-16' : 'w-64'
+        collapsed ? 'w-14' : 'w-56'
       }`}
       initial={{ x: -100 }}
       animate={{ x: 0 }}
       transition={{ duration: 0.3 }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b">
+      <div className="flex items-center justify-between p-3 border-b">
         {!collapsed && (
           <motion.div 
             className="flex items-center space-x-2"
@@ -49,30 +49,30 @@ const Sidebar = ({ collapsed, onToggle, currentUser }) => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">ID</span>
+            <div className="w-7 h-7 bg-primary rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-xs">ID</span>
             </div>
-            <span className="font-bold text-dark text-lg">ID-Networkers</span>
+            <span className="font-bold text-dark text-sm">ID-Networkers</span>
           </motion.div>
         )}
         <button
           onClick={onToggle}
-          className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+          className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
         >
-          <SafeIcon icon={FiMenu} className="w-5 h-5 text-dark" />
+          <SafeIcon icon={FiMenu} className="w-4 h-4 text-dark" />
         </button>
       </div>
 
       {/* Navigation Menu */}
-      <nav className="flex-1 py-4">
-        <ul className="space-y-1 px-2">
+      <nav className="flex-1 py-3">
+        <ul className="space-y-0.5 px-2">
           {menuItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
               <li key={item.path}>
                 <Link
                   to={item.path}
-                  className={`flex items-center px-3 py-3 rounded-lg transition-all duration-200 group ${
+                  className={`flex items-center px-3 py-2 rounded-lg transition-all duration-200 group ${
                     isActive 
                       ? 'bg-primary text-white shadow-md' 
                       : 'text-gray-600 hover:bg-gray-50 hover:text-primary'
@@ -80,13 +80,13 @@ const Sidebar = ({ collapsed, onToggle, currentUser }) => {
                 >
                   <SafeIcon 
                     icon={item.icon} 
-                    className={`w-5 h-5 ${collapsed ? 'mx-auto' : 'mr-3'} ${
+                    className={`w-4 h-4 ${collapsed ? 'mx-auto' : 'mr-3'} ${
                       isActive ? 'text-white' : 'text-gray-500 group-hover:text-primary'
                     }`} 
                   />
                   {!collapsed && (
                     <motion.span 
-                      className="font-medium text-sm"
+                      className="font-medium text-xs"
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.1 }}
@@ -102,20 +102,20 @@ const Sidebar = ({ collapsed, onToggle, currentUser }) => {
       </nav>
 
       {/* User Info & Logout */}
-      <div className="border-t p-4">
+      <div className="border-t p-3">
         {!collapsed && (
           <motion.div 
-            className="mb-4"
+            className="mb-3"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                <SafeIcon icon={FiUser} className="w-5 h-5 text-white" />
+            <div className="flex items-center space-x-3 p-2 bg-gray-50 rounded-lg">
+              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                <SafeIcon icon={FiUser} className="w-4 h-4 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-dark truncate">
+                <p className="text-xs font-medium text-dark truncate">
                   {currentUser.name}
                 </p>
                 <p className="text-xs text-gray-500 truncate">
@@ -126,13 +126,13 @@ const Sidebar = ({ collapsed, onToggle, currentUser }) => {
           </motion.div>
         )}
         
-        <button className="flex items-center w-full px-3 py-3 text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-all duration-200 group">
+        <button className="flex items-center w-full px-3 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-all duration-200 group">
           <SafeIcon 
             icon={FiLogOut} 
-            className={`w-5 h-5 ${collapsed ? 'mx-auto' : 'mr-3'} group-hover:text-primary`} 
+            className={`w-4 h-4 ${collapsed ? 'mx-auto' : 'mr-3'} group-hover:text-primary`} 
           />
           {!collapsed && (
-            <span className="font-medium text-sm">Keluar</span>
+            <span className="font-medium text-xs">Keluar</span>
           )}
         </button>
       </div>

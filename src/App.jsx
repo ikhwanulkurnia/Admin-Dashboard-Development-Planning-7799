@@ -34,11 +34,11 @@ function App() {
           currentUser={currentUser}
         />
         
-        <div className={`flex-1 flex flex-col transition-all duration-300 ${sidebarCollapsed ? 'ml-16' : 'ml-64'}`}>
+        <div className={`flex-1 flex flex-col transition-all duration-300 ${sidebarCollapsed ? 'ml-14' : 'ml-56'}`}>
           <Header />
           
           <motion.main 
-            className="flex-1 overflow-y-auto p-6"
+            className="flex-1 overflow-y-auto p-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}

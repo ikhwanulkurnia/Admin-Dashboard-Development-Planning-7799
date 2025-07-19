@@ -29,19 +29,19 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Page Title */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <h1 className="text-2xl font-bold text-dark mb-2">Dashboard</h1>
-        <p className="text-gray-600">Selamat datang di ID-Networkers Admin Dashboard</p>
+        <h1 className="text-lg font-bold text-dark mb-1">Dashboard</h1>
+        <p className="text-xs text-gray-600">Selamat datang di ID-Networkers Admin Dashboard</p>
       </motion.div>
 
       {/* Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {stats.map((stat, index) => (
           <StatCard
             key={stat.title}
@@ -59,13 +59,13 @@ const Dashboard = () => {
 
       {/* Recent Activities */}
       <motion.div
-        className="bg-white p-6 rounded-xl shadow-sm border"
+        className="bg-white p-4 rounded-xl shadow-sm border"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.3 }}
       >
-        <h3 className="text-lg font-semibold text-dark mb-4">Aktivitas Terbaru</h3>
-        <div className="space-y-4">
+        <h3 className="text-sm font-semibold text-dark mb-3">Aktivitas Terbaru</h3>
+        <div className="space-y-2">
           {[
             { type: 'enrollment', message: 'Ahmad Rizki mendaftar kursus React Development', time: '2 menit lalu' },
             { type: 'certificate', message: 'Sertifikat diterbitkan untuk Maria Sari - UI/UX Design', time: '15 menit lalu' },
@@ -74,15 +74,15 @@ const Dashboard = () => {
           ].map((activity, index) => (
             <motion.div
               key={index}
-              className="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg transition-colors"
+              className="flex items-start space-x-2 p-2 hover:bg-gray-50 rounded-lg transition-colors"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 + index * 0.1 }}
             >
-              <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+              <div className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 flex-shrink-0"></div>
               <div className="flex-1">
-                <p className="text-sm text-dark">{activity.message}</p>
-                <p className="text-xs text-gray-500 mt-1">{activity.time}</p>
+                <p className="text-xs text-dark">{activity.message}</p>
+                <p className="text-xs text-gray-500 mt-0.5">{activity.time}</p>
               </div>
             </motion.div>
           ))}

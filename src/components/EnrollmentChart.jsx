@@ -30,22 +30,22 @@ const EnrollmentChart = () => {
 
   return (
     <motion.div
-      className="bg-white p-6 rounded-xl shadow-sm border"
+      className="bg-white p-4 rounded-xl shadow-sm border"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3, duration: 0.3 }}
     >
-      <div className="mb-6">
-        <h3 className="text-lg font-semibold text-dark mb-4">Enrollment Analytics</h3>
+      <div className="mb-4">
+        <h3 className="text-sm font-semibold text-dark mb-3">Enrollment Analytics</h3>
         
         {/* Filters */}
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-3">
           {Object.entries(filterOptions).map(([key, options]) => (
             <select
               key={key}
               value={filters[key]}
               onChange={(e) => setFilters(prev => ({ ...prev, [key]: e.target.value }))}
-              className="px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="px-2 py-1 text-xs border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent"
             >
               {options.map(option => (
                 <option key={option} value={option}>{option}</option>
@@ -56,36 +56,37 @@ const EnrollmentChart = () => {
       </div>
 
       {/* Chart */}
-      <div className="h-80">
+      <div className="h-72">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+          <LineChart data={data} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
             <XAxis 
               dataKey="name" 
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 12, fill: '#666' }}
+              tick={{ fontSize: 10, fill: '#666' }}
             />
             <YAxis 
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 12, fill: '#666' }}
+              tick={{ fontSize: 10, fill: '#666' }}
             />
             <Tooltip 
               contentStyle={{
                 backgroundColor: 'white',
                 border: '1px solid #e5e5e5',
                 borderRadius: '8px',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                fontSize: '12px'
               }}
             />
             <Line 
               type="monotone" 
               dataKey="enrollments" 
               stroke="#FFA726" 
-              strokeWidth={3}
-              dot={{ fill: '#FFA726', strokeWidth: 2, r: 4 }}
-              activeDot={{ r: 6, stroke: '#FFA726', strokeWidth: 2 }}
+              strokeWidth={2}
+              dot={{ fill: '#FFA726', strokeWidth: 2, r: 3 }}
+              activeDot={{ r: 5, stroke: '#FFA726', strokeWidth: 2 }}
             />
           </LineChart>
         </ResponsiveContainer>

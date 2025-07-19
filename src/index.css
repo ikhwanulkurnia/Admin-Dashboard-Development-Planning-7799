@@ -14,12 +14,57 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #F5F5F5;
+  font-size: 0.875rem; /* Base font size reduced to 14px from 16px */
 }
 
 #root {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+}
+
+h1 {
+  font-size: 1.25rem !important; /* 20px - reduced from 24px */
+}
+
+h2 {
+  font-size: 1.125rem !important; /* 18px - reduced from 20px */
+}
+
+h3 {
+  font-size: 1rem !important; /* 16px - reduced from 18px */
+}
+
+p {
+  font-size: 0.8125rem; /* 13px - reduced from 16px */
+}
+
+.text-xs {
+  font-size: 0.6875rem !important; /* 11px - reduced from 12px */
+}
+
+.text-sm {
+  font-size: 0.75rem !important; /* 12px - reduced from 14px */
+}
+
+.text-base {
+  font-size: 0.8125rem !important; /* 13px - reduced from 16px */
+}
+
+.text-lg {
+  font-size: 0.9375rem !important; /* 15px - reduced from 18px */
+}
+
+.text-xl {
+  font-size: 1.0625rem !important; /* 17px - reduced from 20px */
+}
+
+.text-2xl {
+  font-size: 1.25rem !important; /* 20px - reduced from 24px */
+}
+
+.text-3xl {
+  font-size: 1.5rem !important; /* 24px - reduced from 30px */
 }
 
 /* Custom scrollbar */
