@@ -1,114 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #F5F5F5;
-  font-size: 0.875rem; /* Base font size reduced to 14px from 16px */
-}
-
-#root {
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-}
-
-h1 {
-  font-size: 1.25rem !important; /* 20px - reduced from 24px */
-}
-
-h2 {
-  font-size: 1.125rem !important; /* 18px - reduced from 20px */
-}
-
-h3 {
-  font-size: 1rem !important; /* 16px - reduced from 18px */
-}
-
-p {
-  font-size: 0.8125rem; /* 13px - reduced from 16px */
-}
-
-.text-xs {
-  font-size: 0.6875rem !important; /* 11px - reduced from 12px */
-}
-
-.text-sm {
-  font-size: 0.75rem !important; /* 12px - reduced from 14px */
-}
-
-.text-base {
-  font-size: 0.8125rem !important; /* 13px - reduced from 16px */
-}
-
-.text-lg {
-  font-size: 0.9375rem !important; /* 15px - reduced from 18px */
-}
-
-.text-xl {
-  font-size: 1.0625rem !important; /* 17px - reduced from 20px */
-}
-
-.text-2xl {
-  font-size: 1.25rem !important; /* 20px - reduced from 24px */
-}
-
-.text-3xl {
-  font-size: 1.5rem !important; /* 24px - reduced from 30px */
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
-}
-
-/* Animation utilities */
-.animate-fade-in {
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+/* Add these styles to your existing index.css */
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .scrollbar-thumb-gray-200::-webkit-scrollbar-thumb {
+    background-color: #e5e7eb;
+    border-radius: 0.375rem;
+  }
+
+  .scrollbar-track-transparent::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
   }
 }
 
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .sidebar-mobile {
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .sidebar-mobile.open {
-    transform: translateX(0);
-  }
-}
+/* Add other existing styles */

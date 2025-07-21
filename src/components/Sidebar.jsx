@@ -6,45 +6,35 @@ import SafeIcon from '../common/SafeIcon';
 
 const { 
   FiHome, FiUsers, FiCalendar, FiBook, FiRotateCcw, FiAward,
-  FiBarChart3, FiFileText, FiLogOut, FiMenu, FiUser, 
-  FiChevronDown, FiChevronRight
+  FiBarChart3, FiFileText, FiLogOut, FiUser, 
+  FiChevronDown, FiChevronRight, FiSearch
 } = FiIcons;
 
-const Sidebar = ({ collapsed, onToggle, currentUser }) => {
+const Sidebar = ({ collapsed, currentUser }) => {
   const location = useLocation();
   const [openSubmenu, setOpenSubmenu] = useState(null);
+  const [showCompanyDropdown, setShowCompanyDropdown] = useState(false);
+  const [companySearchTerm, setCompanySearchTerm] = useState('');
+
+  // Sample company list
+  const companies = [
+    { id: 1, name: 'SD Islam Al-Azhar', logo: 'TH' },
+    { id: 2, name: 'SD Islam Al-Furqan', logo: 'AF' },
+    { id: 3, name: 'SD Islam An-Nur', logo: 'AN' },
+    { id: 4, name: 'SD Islam Al-Irsyad', logo: 'AI' },
+  ];
+
+  const filteredCompanies = companies.filter(company =>
+    company.name.toLowerCase().includes(companySearchTerm.toLowerCase())
+  );
 
   const menuItems = [
-    { 
-      path: '/dashboard', 
-      icon: FiHome, 
-      label: 'Dashboard' 
-    },
-    { 
-      path: '/data-siswa', 
-      icon: FiUsers, 
-      label: 'Data Siswa' 
-    },
-    { 
-      path: '/absensi-siswa', 
-      icon: FiCalendar, 
-      label: 'Absensi Siswa' 
-    },
-    { 
-      path: '/hafalan-baru', 
-      icon: FiBook, 
-      label: 'Hafalan Baru' 
-    },
-    { 
-      path: '/murojaah', 
-      icon: FiRotateCcw, 
-      label: 'Murojaah' 
-    },
-    { 
-      path: '/ujian-tahfidz', 
-      icon: FiAward, 
-      label: 'Ujian Tahfidz' 
-    },
+    { path: '/dashboard', icon: FiHome, label: 'Dashboard' },
+    { path: '/data-siswa', icon: FiUsers, label: 'Data Siswa' },
+    { path: '/absensi-siswa', icon: FiCalendar, label: 'Absensi Siswa' },
+    { path: '/hafalan-baru', icon: FiBook, label: 'Hafalan Baru' },
+    { path: '/murojaah', icon: FiRotateCcw, label: 'Murojaah' },
+    { path: '/ujian-tahfidz', icon: FiAward, label: 'Ujian Tahfidz' },
     {
       key: 'statistik',
       icon: FiBarChart3,
@@ -77,39 +67,71 @@ const Sidebar = ({ collapsed, onToggle, currentUser }) => {
   };
 
   return (
-    <motion.div 
-      className={`fixed left-0 top-0 h-full bg-white shadow-lg z-50 transition-all duration-300 ${
-        collapsed ? 'w-14' : 'w-56'
-      }`}
-      initial={{ x: -100 }}
-      animate={{ x: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      {/* Header */}
-      <div className="flex items-center justify-between p-3 border-b">
-        {!collapsed && (
+    <div className={`fixed left-0 top-0 h-full bg-white shadow-lg z-50 transition-all duration-300 flex flex-col ${
+      collapsed ? 'w-14' : 'w-56'
+    }`}>
+      {/* Company Selector */}
+      <div className="p-3 border-b relative">
+        <button
+          onClick={() => !collapsed && setShowCompanyDropdown(!showCompanyDropdown)}
+          className="w-full flex items-center space-x-2"
+        >
+          <div className="w-7 h-7 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
+            <span className="text-white font-bold text-xs">TH</span>
+          </div>
+          {!collapsed && (
+            <>
+              <div className="flex-1 text-left">
+                <span className="font-bold text-dark text-sm truncate block">Tahfidz App</span>
+                <span className="text-xs text-gray-500">SD Islam Al-Azhar</span>
+              </div>
+              <SafeIcon icon={FiChevronDown} className="w-4 h-4 text-gray-400" />
+            </>
+          )}
+        </button>
+
+        {/* Company Dropdown */}
+        {!collapsed && showCompanyDropdown && (
           <motion.div 
-            className="flex items-center space-x-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
+            className="absolute left-0 right-0 top-full mt-1 bg-white border shadow-lg rounded-lg z-50 mx-3"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
           >
-            <div className="w-7 h-7 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xs">TH</span>
+            <div className="p-2">
+              <div className="relative">
+                <SafeIcon 
+                  icon={FiSearch} 
+                  className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-3.5 h-3.5" 
+                />
+                <input
+                  type="text"
+                  placeholder="Cari sekolah..."
+                  value={companySearchTerm}
+                  onChange={(e) => setCompanySearchTerm(e.target.value)}
+                  className="w-full pl-8 pr-3 py-1.5 text-xs border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+              </div>
             </div>
-            <span className="font-bold text-dark text-sm">Tahfidz App</span>
+            <div className="max-h-48 overflow-y-auto">
+              {filteredCompanies.map((company) => (
+                <button
+                  key={company.id}
+                  className="w-full flex items-center space-x-2 px-3 py-2 hover:bg-gray-50 transition-colors"
+                >
+                  <div className="w-6 h-6 bg-primary rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-xs">{company.logo}</span>
+                  </div>
+                  <span className="text-xs text-dark">{company.name}</span>
+                </button>
+              ))}
+            </div>
           </motion.div>
         )}
-        <button
-          onClick={onToggle}
-          className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
-        >
-          <SafeIcon icon={FiMenu} className="w-4 h-4 text-dark" />
-        </button>
       </div>
 
       {/* Navigation Menu */}
-      <nav className="flex-1 py-3 overflow-y-auto">
+      <nav className="flex-1 overflow-y-auto py-3 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
         <ul className="space-y-0.5 px-2">
           {menuItems.map((item, index) => {
             if (item.submenu) {
@@ -226,8 +248,8 @@ const Sidebar = ({ collapsed, onToggle, currentUser }) => {
         </ul>
       </nav>
 
-      {/* User Info & Logout */}
-      <div className="border-t p-3">
+      {/* User Profile & Logout - Sticky Bottom */}
+      <div className="border-t p-3 sticky bottom-0 bg-white">
         {!collapsed && (
           <motion.div 
             className="mb-3"
@@ -261,7 +283,7 @@ const Sidebar = ({ collapsed, onToggle, currentUser }) => {
           )}
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
