@@ -4,28 +4,14 @@ import * as FiIcons from 'react-icons/fi';
 import StatCard from '../components/StatCard';
 import EnrollmentChart from '../components/EnrollmentChart';
 
-const { FiBook, FiUsers, FiAward } = FiIcons;
+const { FiUsers, FiBook, FiAward, FiCalendar } = FiIcons;
 
 const Dashboard = () => {
   const stats = [
-    {
-      title: 'Total Courses',
-      value: 156,
-      icon: FiBook,
-      color: 'primary'
-    },
-    {
-      title: 'Total Students',
-      value: 2847,
-      icon: FiUsers,
-      color: 'success'
-    },
-    {
-      title: 'Certificates Issued',
-      value: 1923,
-      icon: FiAward,
-      color: 'warning'
-    }
+    { title: 'Total Siswa', value: 156, icon: FiUsers, color: 'primary' },
+    { title: 'Hafalan Selesai', value: 2847, icon: FiBook, color: 'success' },
+    { title: 'Ujian Bulan Ini', value: 23, icon: FiAward, color: 'warning' },
+    { title: 'Kehadiran Hari Ini', value: 142, icon: FiCalendar, color: 'primary' }
   ];
 
   return (
@@ -36,12 +22,12 @@ const Dashboard = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <h1 className="text-lg font-bold text-dark mb-1">Dashboard</h1>
-        <p className="text-xs text-gray-600">Selamat datang di ID-Networkers Admin Dashboard</p>
+        <h1 className="text-lg font-bold text-dark mb-1">Dashboard Tahfidz</h1>
+        <p className="text-xs text-gray-600">Selamat datang di Sistem Manajemen Tahfidz</p>
       </motion.div>
 
       {/* Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat, index) => (
           <StatCard
             key={stat.title}
@@ -67,10 +53,10 @@ const Dashboard = () => {
         <h3 className="text-sm font-semibold text-dark mb-3">Aktivitas Terbaru</h3>
         <div className="space-y-2">
           {[
-            { type: 'enrollment', message: 'Ahmad Rizki mendaftar kursus React Development', time: '2 menit lalu' },
-            { type: 'certificate', message: 'Sertifikat diterbitkan untuk Maria Sari - UI/UX Design', time: '15 menit lalu' },
-            { type: 'course', message: 'Kursus baru ditambahkan: Advanced JavaScript', time: '1 jam lalu' },
-            { type: 'payment', message: 'Pembayaran berhasil untuk order #12345', time: '2 jam lalu' },
+            { type: 'hafalan', message: 'Ahmad Rizki menyelesaikan hafalan Al-Baqarah 11-20', time: '2 menit lalu' },
+            { type: 'ujian', message: 'Ujian tahfidz kelas 7A dijadwalkan untuk besok', time: '15 menit lalu' },
+            { type: 'murojaah', message: 'Siti Nurhayati melakukan murojaah Juz 1', time: '1 jam lalu' },
+            { type: 'absensi', message: '142 siswa hadir hari ini', time: '2 jam lalu' },
           ].map((activity, index) => (
             <motion.div
               key={index}

@@ -4,25 +4,26 @@ import { motion } from 'framer-motion';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Dashboard from './pages/Dashboard';
-import CourseManagement from './pages/CourseManagement';
-import CategoryManagement from './pages/CategoryManagement';
-import UserManagement from './pages/UserManagement';
-import Enrollments from './pages/Enrollments';
-import Orders from './pages/Orders';
-import Certificates from './pages/Certificates';
-import BankAccounts from './pages/BankAccounts';
-import Coupons from './pages/Coupons';
-import DataChangeRequests from './pages/DataChangeRequests';
-import ExcelImport from './pages/ExcelImport';
-import AuditLogs from './pages/AuditLogs';
-import Settings from './pages/Settings';
+
+// Import new pages for the updated menu structure
+import DataSiswa from './pages/DataSiswa';
+import AbsensiSiswa from './pages/AbsensiSiswa';
+import HafalanBaru from './pages/HafalanBaru';
+import Murojaah from './pages/Murojaah';
+import UjianTahfidz from './pages/UjianTahfidz';
+import StatistikPekanan from './pages/statistik/StatistikPekanan';
+import StatistikBulanan from './pages/statistik/StatistikBulanan';
+import StatistikSemesteran from './pages/statistik/StatistikSemesteran';
+import StatistikTahunan from './pages/statistik/StatistikTahunan';
+import RekapitulasiNilai from './pages/rapor/RekapitulasiNilai';
+import CetakRapor from './pages/rapor/CetakRapor';
 
 function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [currentUser] = useState({
-    name: 'Admin User',
-    email: 'admin@id-networkers.com',
-    role: 'Administrator'
+    name: 'Ustadz Ahmad',
+    email: 'ahmad@tahfidz.com',
+    role: 'Guru Tahfidz'
   });
 
   return (
@@ -46,18 +47,17 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/course-management" element={<CourseManagement />} />
-              <Route path="/category-management" element={<CategoryManagement />} />
-              <Route path="/user-management" element={<UserManagement />} />
-              <Route path="/enrollments" element={<Enrollments />} />
-              <Route path="/orders" element={<Orders />} />
-              <Route path="/certificates" element={<Certificates />} />
-              <Route path="/bank-accounts" element={<BankAccounts />} />
-              <Route path="/coupons" element={<Coupons />} />
-              <Route path="/data-change-requests" element={<DataChangeRequests />} />
-              <Route path="/excel-import" element={<ExcelImport />} />
-              <Route path="/audit-logs" element={<AuditLogs />} />
-              <Route path="/settings" element={<Settings />} />
+              <Route path="/data-siswa" element={<DataSiswa />} />
+              <Route path="/absensi-siswa" element={<AbsensiSiswa />} />
+              <Route path="/hafalan-baru" element={<HafalanBaru />} />
+              <Route path="/murojaah" element={<Murojaah />} />
+              <Route path="/ujian-tahfidz" element={<UjianTahfidz />} />
+              <Route path="/statistik/pekanan" element={<StatistikPekanan />} />
+              <Route path="/statistik/bulanan" element={<StatistikBulanan />} />
+              <Route path="/statistik/semesteran" element={<StatistikSemesteran />} />
+              <Route path="/statistik/tahunan" element={<StatistikTahunan />} />
+              <Route path="/rapor-tahfidz/rekapitulasi-nilai" element={<RekapitulasiNilai />} />
+              <Route path="/rapor-tahfidz/cetak-rapor" element={<CetakRapor />} />
             </Routes>
           </motion.main>
         </div>
