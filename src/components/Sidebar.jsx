@@ -4,15 +4,26 @@ import { motion } from 'framer-motion';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../common/SafeIcon';
 
-const { 
-  FiHome, FiUsers, FiCalendar, FiBook, FiRotateCcw, FiAward,
-  FiBarChart3, FiFileText, FiLogOut, FiUser, 
-  FiChevronDown, FiChevronRight, FiSearch
+const {
+  FiHome,
+  FiUsers,
+  FiBook,
+  FiRotateCcw,
+  FiAward,
+  FiBarChart3,
+  FiFileText,
+  FiLogOut,
+  FiUser,
+  FiChevronDown,
+  FiSearch,
+  FiLayers,
+  FiGrid,
+  FiTarget,
+  FiClipboard
 } = FiIcons;
 
 const Sidebar = ({ collapsed, currentUser }) => {
   const location = useLocation();
-  const [openSubmenu, setOpenSubmenu] = useState(null);
   const [showCompanyDropdown, setShowCompanyDropdown] = useState(false);
   const [companySearchTerm, setCompanySearchTerm] = useState('');
 
@@ -24,52 +35,28 @@ const Sidebar = ({ collapsed, currentUser }) => {
     { id: 4, name: 'SD Islam Al-Irsyad', logo: 'AI' },
   ];
 
-  const filteredCompanies = companies.filter(company =>
+  const filteredCompanies = companies.filter(company => 
     company.name.toLowerCase().includes(companySearchTerm.toLowerCase())
   );
 
   const menuItems = [
-    { path: '/dashboard', icon: FiHome, label: 'Dashboard' },
+    { path: '/dashboard-superadmin', icon: FiHome, label: 'Dashboard Super Admin' },
+    { path: '/dashboard-admin', icon: FiHome, label: 'Dashboard Admin Sekolah' },
+    { path: '/dashboard-guru', icon: FiHome, label: 'Dashboard Guru' },
+    { path: '/dashboard-orangtua', icon: FiHome, label: 'Dashboard Orang Tua' },
+    { path: '/data-sekolah', icon: FiLayers, label: 'Data Sekolah' },
+    { path: '/data-kelas', icon: FiGrid, label: 'Data Kelas' },
+    { path: '/jenis-ujian', icon: FiTarget, label: 'Jenis Ujian' },
     { path: '/data-siswa', icon: FiUsers, label: 'Data Siswa' },
-    { path: '/absensi-siswa', icon: FiCalendar, label: 'Absensi Siswa' },
     { path: '/hafalan-baru', icon: FiBook, label: 'Hafalan Baru' },
     { path: '/murojaah', icon: FiRotateCcw, label: 'Murojaah' },
-    { path: '/ujian-tahfidz', icon: FiAward, label: 'Ujian Tahfidz' },
-    {
-      key: 'statistik',
-      icon: FiBarChart3,
-      label: 'Statistik',
-      submenu: [
-        { path: '/statistik/pekanan', label: 'Pekanan' },
-        { path: '/statistik/bulanan', label: 'Bulanan' },
-        { path: '/statistik/semesteran', label: 'Semesteran' },
-        { path: '/statistik/tahunan', label: 'Tahunan' }
-      ]
-    },
-    {
-      key: 'rapor-tahfidz',
-      icon: FiFileText,
-      label: 'Rapor Tahfidz',
-      submenu: [
-        { path: '/rapor-tahfidz/rekapitulasi-nilai', label: 'Rekapitulasi Nilai' },
-        { path: '/rapor-tahfidz/cetak-rapor', label: 'Cetak Rapor' }
-      ]
-    }
+    { path: '/ujian', icon: FiAward, label: 'Ujian' },
+    { path: '/rekapitulasi-nilai', icon: FiClipboard, label: 'Rekapitulasi Nilai' },
+    { path: '/cetak-raport', icon: FiFileText, label: 'Cetak Raport' }
   ];
 
-  const toggleSubmenu = (key) => {
-    if (collapsed) return;
-    setOpenSubmenu(openSubmenu === key ? null : key);
-  };
-
-  const isSubmenuActive = (submenu) => {
-    return submenu?.some(item => location.pathname === item.path);
-  };
-
   return (
-    <div className={`fixed left-0 top-0 h-full bg-white shadow-lg z-50 transition-all duration-300 flex flex-col ${
-      collapsed ? 'w-14' : 'w-56'
-    }`}>
+    <div className={`fixed left-0 top-0 h-full bg-white shadow-lg z-50 transition-all duration-300 flex flex-col ${collapsed ? 'w-14' : 'w-56'}`}>
       {/* Company Selector */}
       <div className="p-3 border-b relative">
         <button
@@ -92,7 +79,7 @@ const Sidebar = ({ collapsed, currentUser }) => {
 
         {/* Company Dropdown */}
         {!collapsed && showCompanyDropdown && (
-          <motion.div 
+          <motion.div
             className="absolute left-0 right-0 top-full mt-1 bg-white border shadow-lg rounded-lg z-50 mx-3"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -100,10 +87,7 @@ const Sidebar = ({ collapsed, currentUser }) => {
           >
             <div className="p-2">
               <div className="relative">
-                <SafeIcon 
-                  icon={FiSearch} 
-                  className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-3.5 h-3.5" 
-                />
+                <SafeIcon icon={FiSearch} className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 w-3.5 h-3.5" />
                 <input
                   type="text"
                   placeholder="Cari sekolah..."
@@ -134,116 +118,36 @@ const Sidebar = ({ collapsed, currentUser }) => {
       <nav className="flex-1 overflow-y-auto py-3 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
         <ul className="space-y-0.5 px-2">
           {menuItems.map((item, index) => {
-            if (item.submenu) {
-              const isActive = isSubmenuActive(item.submenu);
-              const isOpen = openSubmenu === item.key;
-              
-              return (
-                <li key={item.key}>
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
+            const isActive = location.pathname === item.path;
+            return (
+              <li key={item.path}>
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                >
+                  <Link
+                    to={item.path}
+                    className={`flex items-center px-3 py-2 rounded-lg transition-all duration-200 group ${isActive ? 'bg-primary text-white shadow-md' : 'text-gray-600 hover:bg-gray-50 hover:text-primary'}`}
                   >
-                    <button
-                      onClick={() => toggleSubmenu(item.key)}
-                      className={`w-full flex items-center px-3 py-2 rounded-lg transition-all duration-200 group ${
-                        isActive 
-                          ? 'bg-primary text-white shadow-md' 
-                          : 'text-gray-600 hover:bg-gray-50 hover:text-primary'
-                      }`}
-                    >
-                      <SafeIcon 
-                        icon={item.icon} 
-                        className={`w-4 h-4 ${collapsed ? 'mx-auto' : 'mr-3'} ${
-                          isActive ? 'text-white' : 'text-gray-500 group-hover:text-primary'
-                        }`} 
-                      />
-                      {!collapsed && (
-                        <>
-                          <span className="font-medium text-xs flex-1 text-left">
-                            {item.label}
-                          </span>
-                          <SafeIcon 
-                            icon={isOpen ? FiChevronDown : FiChevronRight} 
-                            className={`w-3 h-3 transition-transform ${
-                              isActive ? 'text-white' : 'text-gray-400'
-                            }`} 
-                          />
-                        </>
-                      )}
-                    </button>
-                    
-                    {!collapsed && isOpen && (
-                      <motion.div 
-                        className="ml-4 mt-1 space-y-1"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.2 }}
+                    <SafeIcon
+                      icon={item.icon}
+                      className={`w-4 h-4 ${collapsed ? 'mx-auto' : 'mr-3'} ${isActive ? 'text-white' : 'text-gray-500 group-hover:text-primary'}`}
+                    />
+                    {!collapsed && (
+                      <motion.span
+                        className="font-medium text-xs"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 }}
                       >
-                        {item.submenu.map((subItem) => {
-                          const isSubActive = location.pathname === subItem.path;
-                          return (
-                            <Link
-                              key={subItem.path}
-                              to={subItem.path}
-                              className={`flex items-center px-3 py-1.5 rounded-lg text-xs transition-all duration-200 ${
-                                isSubActive 
-                                  ? 'bg-primary bg-opacity-10 text-primary font-medium' 
-                                  : 'text-gray-600 hover:bg-gray-50 hover:text-primary'
-                              }`}
-                            >
-                              <div className={`w-1 h-1 rounded-full mr-2 ${
-                                isSubActive ? 'bg-primary' : 'bg-gray-400'
-                              }`}></div>
-                              <span>{subItem.label}</span>
-                            </Link>
-                          );
-                        })}
-                      </motion.div>
+                        {item.label}
+                      </motion.span>
                     )}
-                  </motion.div>
-                </li>
-              );
-            } else {
-              const isActive = location.pathname === item.path;
-              return (
-                <li key={item.path}>
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                  >
-                    <Link
-                      to={item.path}
-                      className={`flex items-center px-3 py-2 rounded-lg transition-all duration-200 group ${
-                        isActive 
-                          ? 'bg-primary text-white shadow-md' 
-                          : 'text-gray-600 hover:bg-gray-50 hover:text-primary'
-                      }`}
-                    >
-                      <SafeIcon 
-                        icon={item.icon} 
-                        className={`w-4 h-4 ${collapsed ? 'mx-auto' : 'mr-3'} ${
-                          isActive ? 'text-white' : 'text-gray-500 group-hover:text-primary'
-                        }`} 
-                      />
-                      {!collapsed && (
-                        <motion.span 
-                          className="font-medium text-xs"
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.1 }}
-                        >
-                          {item.label}
-                        </motion.span>
-                      )}
-                    </Link>
-                  </motion.div>
-                </li>
-              );
-            }
+                  </Link>
+                </motion.div>
+              </li>
+            );
           })}
         </ul>
       </nav>
@@ -251,7 +155,7 @@ const Sidebar = ({ collapsed, currentUser }) => {
       {/* User Profile & Logout - Sticky Bottom */}
       <div className="border-t p-3 sticky bottom-0 bg-white">
         {!collapsed && (
-          <motion.div 
+          <motion.div
             className="mb-3"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -272,11 +176,11 @@ const Sidebar = ({ collapsed, currentUser }) => {
             </div>
           </motion.div>
         )}
-        
+
         <button className="flex items-center w-full px-3 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-all duration-200 group">
-          <SafeIcon 
-            icon={FiLogOut} 
-            className={`w-4 h-4 ${collapsed ? 'mx-auto' : 'mr-3'} group-hover:text-primary`} 
+          <SafeIcon
+            icon={FiLogOut}
+            className={`w-4 h-4 ${collapsed ? 'mx-auto' : 'mr-3'} group-hover:text-primary`}
           />
           {!collapsed && (
             <span className="font-medium text-xs">Keluar</span>

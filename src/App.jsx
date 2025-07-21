@@ -4,7 +4,22 @@ import { motion } from 'framer-motion';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Dashboard from './pages/Dashboard';
-// ... other imports
+import DataSiswa from './pages/DataSiswa';
+import HafalanBaru from './pages/HafalanBaru';
+import Murojaah from './pages/Murojaah';
+import NotFoundPage from './pages/NotFoundPage';
+
+// Import halaman-halaman baru
+import DashboardSuperAdmin from './pages/dashboards/DashboardSuperAdmin';
+import DashboardAdmin from './pages/dashboards/DashboardAdmin';
+import DashboardGuru from './pages/dashboards/DashboardGuru';
+import DashboardOrangTua from './pages/dashboards/DashboardOrangTua';
+import DataSekolah from './pages/DataSekolah';
+import DataKelas from './pages/DataKelas';
+import JenisUjian from './pages/JenisUjian';
+import Ujian from './pages/Ujian';
+import RekapitulasiNilai from './pages/RekapitulasiNilai';
+import CetakRaport from './pages/CetakRaport';
 
 function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -38,7 +53,20 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              {/* ... other routes */}
+              <Route path="/dashboard-superadmin" element={<DashboardSuperAdmin />} />
+              <Route path="/dashboard-admin" element={<DashboardAdmin />} />
+              <Route path="/dashboard-guru" element={<DashboardGuru />} />
+              <Route path="/dashboard-orangtua" element={<DashboardOrangTua />} />
+              <Route path="/data-sekolah" element={<DataSekolah />} />
+              <Route path="/data-kelas" element={<DataKelas />} />
+              <Route path="/jenis-ujian" element={<JenisUjian />} />
+              <Route path="/data-siswa" element={<DataSiswa />} />
+              <Route path="/hafalan-baru" element={<HafalanBaru />} />
+              <Route path="/murojaah" element={<Murojaah />} />
+              <Route path="/ujian" element={<Ujian />} />
+              <Route path="/rekapitulasi-nilai" element={<RekapitulasiNilai />} />
+              <Route path="/cetak-raport" element={<CetakRaport />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </motion.main>
         </div>

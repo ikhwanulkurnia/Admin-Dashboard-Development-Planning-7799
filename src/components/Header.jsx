@@ -9,7 +9,7 @@ const Header = ({ onToggleSidebar }) => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   return (
-    <motion.header 
+    <motion.header
       className="bg-white shadow-sm border-b px-5 py-3 flex items-center justify-between sticky top-0 z-40"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -30,14 +30,11 @@ const Header = ({ onToggleSidebar }) => {
       <div className="flex items-center space-x-3">
         {/* Search */}
         <div className="relative">
-          <SafeIcon 
-            icon={FiSearch} 
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-3.5 h-3.5" 
-          />
-          <input 
-            type="text" 
-            placeholder="Cari..." 
-            className="pl-9 pr-3 py-1.5 text-xs border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" 
+          <SafeIcon icon={FiSearch} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-3.5 h-3.5" />
+          <input
+            type="text"
+            placeholder="Cari..."
+            className="pl-9 pr-3 py-1.5 text-xs border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
           />
         </div>
 
@@ -49,7 +46,7 @@ const Header = ({ onToggleSidebar }) => {
 
         {/* Profile Menu */}
         <div className="relative">
-          <button 
+          <button
             onClick={() => setShowProfileMenu(!showProfileMenu)}
             className="flex items-center space-x-2 p-1.5 hover:bg-gray-50 rounded-lg transition-colors"
           >
@@ -64,7 +61,7 @@ const Header = ({ onToggleSidebar }) => {
 
           {/* Dropdown Menu */}
           {showProfileMenu && (
-            <motion.div 
+            <motion.div
               className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 border"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}

@@ -37,7 +37,6 @@ const EnrollmentChart = () => {
     >
       <div className="mb-4">
         <h3 className="text-sm font-semibold text-dark mb-3">Enrollment Analytics</h3>
-        
         {/* Filters */}
         <div className="flex flex-wrap gap-3">
           {Object.entries(filterOptions).map(([key, options]) => (
@@ -60,30 +59,21 @@ const EnrollmentChart = () => {
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-            <XAxis 
-              dataKey="name" 
-              axisLine={false}
-              tickLine={false}
-              tick={{ fontSize: 10, fill: '#666' }}
-            />
-            <YAxis 
-              axisLine={false}
-              tickLine={false}
-              tick={{ fontSize: 10, fill: '#666' }}
-            />
-            <Tooltip 
+            <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#666' }} />
+            <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#666' }} />
+            <Tooltip
               contentStyle={{
                 backgroundColor: 'white',
                 border: '1px solid #e5e5e5',
                 borderRadius: '8px',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)',
                 fontSize: '12px'
               }}
             />
-            <Line 
-              type="monotone" 
-              dataKey="enrollments" 
-              stroke="#FFA726" 
+            <Line
+              type="monotone"
+              dataKey="enrollments"
+              stroke="#FFA726"
               strokeWidth={2}
               dot={{ fill: '#FFA726', strokeWidth: 2, r: 3 }}
               activeDot={{ r: 5, stroke: '#FFA726', strokeWidth: 2 }}

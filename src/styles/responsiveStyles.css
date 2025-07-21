@@ -1,0 +1,85 @@
+/* Mobile responsiveness styles */
+@media (max-width: 640px) {
+  .responsive-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .responsive-card {
+    margin-bottom: 1rem;
+  }
+  
+  .responsive-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .responsive-form {
+    flex-direction: column !important;
+  }
+  
+  .responsive-form > * {
+    width: 100% !important;
+    margin-bottom: 0.5rem;
+  }
+  
+  .responsive-container {
+    padding: 1rem !important;
+  }
+  
+  .mobile-hidden {
+    display: none !important;
+  }
+  
+  .mobile-only {
+    display: block;
+  }
+}
+
+/* Tablet responsiveness styles */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .tablet-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .tablet-hidden {
+    display: none !important;
+  }
+  
+  .tablet-only {
+    display: block;
+  }
+}
+
+@media (min-width: 1025px) {
+  .desktop-only {
+    display: block;
+  }
+  
+  .desktop-hidden {
+    display: none !important;
+  }
+}
+
+/* Add responsive font sizes */
+@media (max-width: 640px) {
+  .responsive-text-xl {
+    font-size: 1.25rem !important;
+  }
+  
+  .responsive-text-lg {
+    font-size: 1.125rem !important;
+  }
+  
+  .responsive-text-base {
+    font-size: 1rem !important;
+  }
+  
+  .responsive-text-sm {
+    font-size: 0.875rem !important;
+  }
+  
+  .responsive-text-xs {
+    font-size: 0.75rem !important;
+  }
+}
